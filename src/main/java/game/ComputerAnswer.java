@@ -13,7 +13,7 @@ public class ComputerAnswer {
     private ArrayList<String> usedWords = new ArrayList<>();
 
     ComputerAnswer() {
-        notUsedWords = new ArrayList<>(new Reader().readFile("C:\\Users\\kurey\\IdeaProjects\\Core_Poject\\src\\main\\resources\\Cities"));
+        notUsedWords = new ArrayList<>(new Reader().readFile("src\\main\\resources\\Cities"));
     }
 
     public String computersTurn(String input) {
