@@ -1,5 +1,6 @@
 package reader;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class Reader {
 
     public List<String> readFile(File file) {
 
-        try(FileReader reader = new FileReader(file)) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             return reader.readAllLines();
         }catch (IOException e) {
             System.out.println(e.getMessage());

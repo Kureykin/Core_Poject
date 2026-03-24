@@ -31,11 +31,9 @@ public class GameWindow extends JFrame {
         return gameTitle;
     }
 
-
     private JLabel hitToInputConfig() {
         return new JLabel("Напиши iм´я мiста: ");
     }
-
 
     private JButton buttonConfig() {
         JButton button = new JButton("Надiслати");
@@ -43,7 +41,6 @@ public class GameWindow extends JFrame {
 
         return button;
     }
-
 
     private JPanel panelForming() {
         JPanel panel = new JPanel();
@@ -54,14 +51,12 @@ public class GameWindow extends JFrame {
         return panel;
     }
 
-
     private Container containerConfig() {
         Container containerCenter = new Container();
         containerCenter.setLayout(new GridLayout(2,2,20,10));
 
         computerAnswer = new JLabel("Комп´ютер: ");
         answerField = new JTextField();
-
 
         containerCenter.add(hitToInputConfig());
         containerCenter.add(answerField);
@@ -71,12 +66,10 @@ public class GameWindow extends JFrame {
         return containerCenter;
     }
 
-
     private void layoutConfig(JPanel panel) {
         JPanel leftPanel = new JPanel();
         JPanel bottomPanel = new JPanel();
         JPanel rightPanel = new JPanel();
-
 
         panel.add(rightPanel, BorderLayout.EAST);
         panel.add(bottomPanel, BorderLayout.SOUTH);

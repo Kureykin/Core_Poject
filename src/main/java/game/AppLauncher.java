@@ -24,7 +24,7 @@ public class AppLauncher {
     public static String takePlayerInput(String input) {
         String computerAnswer;
         if(!input.isBlank()) {
-            computerAnswer = compAnswer.computersTurn(input);
+            computerAnswer = compAnswer.computersTurn(input.toUpperCase().strip());
 
             whoWin(input, computerAnswer);
         }
@@ -42,6 +42,8 @@ public class AppLauncher {
     }
 
     public static void main(String[] args) {
+
+         new ComputerAnswer().showList();
 
         new StartWindow();
     }

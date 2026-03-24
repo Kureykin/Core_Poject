@@ -4,46 +4,87 @@ import reader.Reader;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
 public class ComputerAnswer {
 
-    private ArrayList<String> notUsedWords;
-    private ArrayList<String> usedWords = new ArrayList<>();
+    private static ArrayList<String> words;
+    private static HashSet<String> usedWords = new HashSet<>();
+
 
     ComputerAnswer() {
-        notUsedWords = new ArrayList<>(new Reader().readFile("src\\main\\resources\\Cities"));
+        words = new ArrayList<>(
+                new Reader().readFile("src\\main\\resources\\Cities").stream()
+                        .map(String::toUpperCase).toList()
+        );
     }
+
 
     public String computersTurn(String input) {
         String compAnswer;
 
+        if(!words.contains(input)) {
+            JOptionPane.showMessageDialog(null, "Не вiдома назва");
+            return "";
+        }
 
-        deleteUsedWord(input);
-
-        compAnswer = getCityName(input);
-        deleteUsedWord(compAnswer);
+       if(!usedWords.contains(input)){
+           addToUsedList(input);
+           compAnswer = getCityName(input);
+           addToUsedList(compAnswer);
+       }
+       else {
+           compAnswer = "Це вже було";
+       }
 
         return compAnswer;
     }
 
     public void showList() {
-        System.out.println(notUsedWords.toString());
+        System.out.println(words.toString());
     }
 
-    private void deleteUsedWord(String word) {
-        notUsedWords.remove(word);
+    private void addToUsedList(String word) {
+        usedWords.add(word);
     }
 
     private String getCityName(String firstCityName) {
 
-        String lastLetter = "" + firstCityName.charAt(firstCityName.length() - 1);
-        List<String> temp = notUsedWords.stream().filter(str -> str.contains(lastLetter.toUpperCase()))
+        Research research = new Research();
+
+        char lastLetter = research.findLastLetter(firstCityName);
+        List<String> temp = words.stream().filter(str -> str.charAt(0) == lastLetter)
                             .toList();
 
-        return !temp.isEmpty() ? temp.getFirst(): "Немає назви";
+        temp = research.findNotUsedWord(temp);
+
+        return !temp.isEmpty() ? temp.getFirst() : "Немає назви";
 
     }
 
+    static class Research {
+
+        public char findLastLetter(String input) {
+            for (int i = 1; i < input.length(); i++) {
+                char lastLetter = input.strip().charAt(input.length() - i);
+
+                for (String name: words) {
+                    if(name.charAt(0) == lastLetter){
+                        return lastLetter;
+                    }
+                }
+            }
+
+            return ' ';
+        }
+
+        public List<String> findNotUsedWord(List<String> list) {
+            return list.stream()
+                    .filter(str -> !usedWords.contains(str))
+                    .toList();
+        }
+
+    }
 }
