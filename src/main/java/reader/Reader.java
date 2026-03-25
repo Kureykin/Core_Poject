@@ -1,24 +1,18 @@
 package reader;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class Reader {
 
-    public List<String> readFile(String path) {
-        return readFile(new File(path));
-    }
+    public List<String> readFile() throws ReaderException {
 
-    public List<String> readFile(File file) {
-
-        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            return reader.readAllLines();
-        }catch (IOException e) {
-            System.out.println(e.getMessage());
+        try(InputStream is = getClass().getClassLoader().getResourceAsStream("cities")) {
+            try(BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+                return reader.readAllLines();
+            }
+        } catch (IOException e) {
+            throw new ReaderException(e);
         }
-        return null;
     }
 }

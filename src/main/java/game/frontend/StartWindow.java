@@ -1,6 +1,6 @@
 package game.frontend;
 
-import game.AppLauncher;
+import game.InputOutputManger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,10 +57,8 @@ public class StartWindow {
         public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
 
-            AppLauncher.getStartGame();
+            InputOutputManger.getStartGame();
         }
     }
-
-
 
 }

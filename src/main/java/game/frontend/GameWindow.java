@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import game.AppLauncher;
+import game.InputOutputManger;
 
 
 public class GameWindow extends JFrame {
@@ -83,7 +83,7 @@ public class GameWindow extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            computerAnswer.setText("Комп´ютер: " + AppLauncher.takePlayerInput(answerField.getText()));
+            computerAnswer.setText("Комп´ютер: " + InputOutputManger.takePlayerInput(answerField.getText()));
         }
     }
 }
