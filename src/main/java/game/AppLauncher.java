@@ -8,11 +8,9 @@ import javax.swing.*;
 public class AppLauncher {
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
             Reader reader = new Reader();
             ComputerAnswerFinder finder = new ComputerAnswerFinder(reader);
             InputOutputManager manager = new InputOutputManager(finder);
             new StartWindow(manager);
-        });
     }
 }
