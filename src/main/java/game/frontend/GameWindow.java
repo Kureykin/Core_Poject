@@ -5,16 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import game.InputOutputManger;
-
+import game.InputOutputManager;
 
 public class GameWindow extends JFrame {
 
     private JLabel computerAnswer;
     private JTextField answerField;
+    private InputOutputManager manager;
 
+    public GameWindow(InputOutputManager manager) {
+        this.manager = manager;
 
-    public GameWindow() {
         super("Мiста");
         super.setDefaultCloseOperation(EXIT_ON_CLOSE);
         super.setBounds(760, 290, 400, 400);
@@ -78,12 +79,11 @@ public class GameWindow extends JFrame {
         panel.add(titleConfig(), BorderLayout.NORTH);
     }
 
-
     private class SandEvent implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            computerAnswer.setText("Комп´ютер: " + InputOutputManger.takePlayerInput(answerField.getText()));
+            computerAnswer.setText("Комп´ютер: " + manager.takePlayerInput(answerField.getText()));
         }
     }
 }

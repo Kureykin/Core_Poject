@@ -4,11 +4,15 @@ import game.frontend.GameWindow;
 
 import javax.swing.*;
 
-public class InputOutputManger {
-    static GameWindow window;
-    static ComputerAnswerFinder compAnswer = new ComputerAnswerFinder();
+public class InputOutputManager {
+    GameWindow window;
+    static ComputerAnswerFinder compAnswer;
 
-    private static void whoWin(String input, String compAnswer) {
+    InputOutputManager(ComputerAnswerFinder compAnswer) {
+        this.compAnswer = compAnswer;
+    }
+
+    private void whoWin(String input, String compAnswer) {
         if(input.equals("здаюсь")) {
             JOptionPane.showMessageDialog(null, "Ви програли");
             window.dispose();
@@ -20,7 +24,7 @@ public class InputOutputManger {
         }
     }
 
-    public static String takePlayerInput(String input) {
+    public String takePlayerInput(String input) {
         String computerAnswer;
         if(!input.isBlank()) {
             computerAnswer = compAnswer.computersTurn(input.toUpperCase().strip());
@@ -35,8 +39,8 @@ public class InputOutputManger {
         return computerAnswer;
     }
 
-    public static void getStartGame() {
-        window = new GameWindow();
+    public void getStartGame() {
+        window = new GameWindow(this);
         window.setVisible(true);
     }
 

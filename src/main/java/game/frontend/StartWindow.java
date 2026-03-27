@@ -1,9 +1,8 @@
 package game.frontend;
 
-import game.InputOutputManger;
+import game.InputOutputManager;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,14 +11,16 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class StartWindow {
 
     private final JFrame frame;
+    private InputOutputManager manager;
 
-    public StartWindow() {
+    public StartWindow(InputOutputManager manager) {
+        this.manager = manager;
         frame = new JFrame("Welcome");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setBounds(760, 490, 400, 100);
         frame.setContentPane(panelConfig());
         frame.setVisible(true);
-        }
+    }
 
     private JLabel textConfig() {
         JLabel text = new JLabel("Ласкаво просимо до гри!!!");
@@ -57,7 +58,7 @@ public class StartWindow {
         public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
 
-            InputOutputManger.getStartGame();
+            manager.getStartGame();
         }
     }
 

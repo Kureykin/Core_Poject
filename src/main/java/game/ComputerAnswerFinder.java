@@ -8,16 +8,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-
 public class ComputerAnswerFinder {
 
     private static ArrayList<String> words;
     private static HashSet<String> usedWords = new HashSet<>();
     private static final  String ukrainianAlphabet = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ";
 
-    ComputerAnswerFinder() {
+    ComputerAnswerFinder(Reader reader) {
         try {
-            words = new ArrayList<>(new Reader().readFile().stream().map(String::toUpperCase).toList());
+            words = new ArrayList<>(reader.readFile().stream().map(String::toUpperCase).toList());
         } catch (ReaderException e) {
             throw new RuntimeException(e);
         }
@@ -40,6 +39,7 @@ public class ComputerAnswerFinder {
 
         return ' ';
     }
+
     private static List<String> findNotUsedWord(List<String> list) {
         return list.stream()
                 .filter(str -> !usedWords.contains(str))
@@ -81,7 +81,5 @@ public class ComputerAnswerFinder {
         return !temp.isEmpty() ? temp.getFirst() : "Немає назви";
 
     }
-
-
 
 }
